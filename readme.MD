@@ -1,5 +1,7 @@
 Henry Bot
 ----------
+Online version : http://gael-marguiller.fr/bot/index.html
+----------
 
 This is our beautiful child Henry ! You can talk to him but don't be hurtful !
 
