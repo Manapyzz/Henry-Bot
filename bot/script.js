@@ -10,6 +10,7 @@ $(function() {
            }
 
        });
+       $('#message').val('');
        return false
    })
 });

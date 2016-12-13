@@ -27,7 +27,7 @@ if(preg_match("(^!gif)",$s)){
 
     $result = explode('!gif', $s);
 
-    $giphy = file_get_contents("http://api.giphy.com/v1/gifs/search?q=".urlencode($query)."&api_key=dc6zaTOxFJmzC");
+    $giphy = file_get_contents("http://api.giphy.com/v1/gifs/search?q=".urlencode($result[1])."&api_key=dc6zaTOxFJmzC");
 
     $jsonGiphy = json_decode($giphy, true);
 
@@ -44,22 +44,33 @@ if(preg_match("(^!gif)",$s)){
 
     $query = $result[1];
 
-    $url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles='.urlencode($query);
+   if($query !== '') {
+       $url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles='.urlencode($query);
 
-    $wikiData = curl_get_contents($url);
+       $wikiData = curl_get_contents($url);
 
-    $jsonWiki = json_decode($wikiData, true);
+       $jsonWiki = json_decode($wikiData, true);
 
-    foreach($jsonWiki['query']['pages'] as $value) {
-        $rep = $value['extract'];
-    }
+       if(isset($jsonWiki['query']['pages'])) {
+           foreach($jsonWiki['query']['pages'] as $value) {
+               if(isset($value['extract'])) {
+                   $rep = $value['extract'];
+               } else {
+                   $rep = "wiki not found";
+               }
+           }
+       } else {
+           $rep = "wiki not found";
+       }
+   } else {
+        $rep = "wiki not found";
+   }
+
 } else if (preg_match("(^!clear)",$s)) {
     echo '<script src="clear.js"></script>';
 } else {
     $rep = $bot1session->think($s);
 }
-
-
 
 echo $rep;
 

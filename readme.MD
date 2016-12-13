@@ -1,7 +1,7 @@
 Henry Bot
 ----------
-Online version : http://gael-marguiller.fr/bot/index.html
-----------
+**Online version : http://gael-marguiller.fr/bot/index.html**
+**If you want to use the local version please put your vhost on the index.html**
 
 This is our beautiful child Henry ! You can talk to him but don't be hurtful !
 
